@@ -7,10 +7,15 @@ const   h3_1 = document.createElement('h3')
 const	h3_2 = document.createElement('h3')
 const	link = document.createElement('a')
 const	button = document.createElement('button')
+
+// get auth token from https://github.com/spotify/web-api-auth-examples. Follow instructions for Authorization Code flow
+// place auth token below in var authToken
+
+var authToken = ''
 var myHeaders = new Headers({
 	'Accept': 'application/json',
 	'Content-Type': 'application/json',
-	'Authorization': 'Bearer BQAEIHs9QoxN8KD3x2QNAqdDTDyFBkMx0S-U8EIAOdQLp4Y3aPxYkYPF7NJGNvSDLTXo-NV5Y_hLztzXYBuIfyiJzr26TeWWP-v1TWqUGXNAd9w7or_2eTSDMwK1grMaFacji6Pct7-BWVGPKVYrK-21JubPeidn'
+	'Authorization': 'Bearer ' + authToken
 })
 
 let fetchData = { 
@@ -204,7 +209,6 @@ fetch('https://api.spotify.com/v1/artists/4dpARuHxo51G3z768sgnrY', fetchData)
 }
 
 function playTracks(url) {
-	// console.log(!document.getElementById('frame-songs'))
 	if (!document.getElementById('frame-songs')) {
 		var songDiv = document.createElement('div')
 		var songFrame = document.createElement('IFRAME')
