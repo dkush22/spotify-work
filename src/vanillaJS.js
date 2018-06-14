@@ -25,6 +25,8 @@ let fetchData = {
 container.addEventListener('click', addChange)
 container
 
+
+// gets event from buttons and either calls function to repopulate with a new artist or plays one of the tracks
 function addChange() {
 
 if (event.target.nodeName.toLowerCase() === 'button' && event.target.className === 'populate artists') {
@@ -37,6 +39,8 @@ else if (event.target.nodeName.toLowerCase() === 'button' && event.target.classN
 
 }
 
+
+// initial population of site with Adele info
 function populateAdele() {
 fetch('https://api.spotify.com/v1/artists/4dpARuHxo51G3z768sgnrY', fetchData)
 .then((resp) => resp.json())
@@ -57,6 +61,7 @@ fetch('https://api.spotify.com/v1/artists/4dpARuHxo51G3z768sgnrY', fetchData)
 });
 }
 
+// initial population of Adele's related artists 
 function relatedArtists() {
 	fetch('https://api.spotify.com/v1/artists/4dpARuHxo51G3z768sgnrY/related-artists', fetchData)
 	.then((resp) => resp.json())
@@ -85,6 +90,7 @@ function relatedArtists() {
 	});
 }
 
+// initial population of Adele's top tracks
 function topTracks() {
 	fetch('https://api.spotify.com/v1/artists/4dpARuHxo51G3z768sgnrY/top-tracks?country=US', fetchData)
 	.then((resp) => resp.json())
@@ -109,6 +115,7 @@ function topTracks() {
 	});
 }
 
+// repopulates page with new artist's information
 function repopulateNewArtist(url) {
 container.innerHTML = ''
 fetch(url, fetchData)
@@ -130,6 +137,7 @@ fetch(url, fetchData)
 });
 }
 
+// repopulates page with new artist's related artists. If no related artists are found, it calls on the function to repopulate Adele
 function repopulateRelatedArtists(url) {
 	fetch(url + '/related-artists', fetchData)
 	.then((resp) => resp.json())
@@ -161,6 +169,7 @@ function repopulateRelatedArtists(url) {
 	});
 }
 
+// repopulates page with new artist's top tracks
 function repopulateTopTracks(url) {
 	fetch(url + '/top-tracks?country=US', fetchData)
 	.then((resp) => resp.json())
@@ -185,7 +194,7 @@ function repopulateTopTracks(url) {
 	});
 }
 
-
+// if no related artists are found, repopulates page with Adele with message saying no related artists were found
 function repopulateAdele() {
 container.innerHTML = ''
 fetch('https://api.spotify.com/v1/artists/4dpARuHxo51G3z768sgnrY', fetchData)
@@ -208,6 +217,8 @@ fetch('https://api.spotify.com/v1/artists/4dpARuHxo51G3z768sgnrY', fetchData)
 });
 }
 
+
+// plays 30 second clip of artist's top tracks
 function playTracks(url) {
 	if (!document.getElementById('frame-songs')) {
 		var songDiv = document.createElement('div')
